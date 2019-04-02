@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    p Hello #{name}
+
+block footer
+    ul Lista
+        each item in h.menu
+            li #{item.title}
