@@ -79,3 +79,13 @@ exports.updateStore = async(req, res) => {
     <a href="/stores/${store.slug}">View Store -> </a>`);
     res.redirect(`/stores/${store._id}/edit`);
 };
+
+exports.getTag = async(req, res) => {
+    const tag = req.params.id;
+    const Promisetags = Store.getTagsList();
+    const tagQuery = tag || { $exits: true };
+    const PromiseStore = Store.find({ tags: tagQuery });
+    const [tags, stores] = await Promise.all([Promisetags, PromiseStore]);
+
+    res.render('tags', { tags, title: 'Tags', tag, stores })
+};
